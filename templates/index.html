@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}" />
+    <meta charset="UTF-8">
+    <title>Codesearch-Prototype</title>
+</head>
+<body>
+<div class="header-container">
+    <div class="logo-and-title">
+        <span class="dbis-text">DBIS</span>
+        <img class="uni-logo" src="{{ url_for('static', filename='logo-uni-ulm.svg') }}" alt="University Logo">
+    </div>
+</div>
+
+<div class="banner">
+    GESIS: Codesearch-Prototype
+</div>
+
+<div class="search-container">
+  <form id="search-form" action="/" method="POST">
+      <!-- Search Bar -->
+      <input type="text" name="search_query" class="search-bar" placeholder="Search..." required>
+
+      <!-- Filter Button -->
+      <button type="button" class="filter-button" onclick="toggleFilters()">Filter</button>
+
+      <!-- Search Button -->
+      <button type="submit" class="search-button">Search</button>
+
+      <!-- Filter Options -->
+      <div class="filter-options" id="filter-options">
+          <label><input type="checkbox" name="filters" value="Code/Comment"> Code/Comment</label>
+          <label><input type="checkbox" name="filters" value="Author"> Author</label>
+          <label><input type="checkbox" name="filters" value="Title"> Title</label>
+          <label><input type="checkbox" name="filters" value="Datasets"> Dataset</label>
+      </div>
+  </form>
+</div>
+
+<!-- Main Results Grid -->
+<div class="results-grid">
+    <!-- Left Container: Results 1-3 -->
+    <div class="results-container">
+        <h2 class="results-heading">Results 1-3 for {{ search_type }} search</h2>
+        {% if result1 %}
+        <div class="result-item">
+            <div class="ranking">1st Best Match</div>
+			<div class="result-comment">Project Title: {{ result1["title"] }}</div>
+            <div class="result-comment">Filename: {{ result1["source_file"] }}</div>
+            <div class="result-detail">Line of Code: {{ result1["code_line"] }}</div>
+            <div class="result-detail">Code: <pre>{{ result1["code"] }}</pre></div>
+            <div class="result-comment">Comment: {{ result1["comment"] }}</div>
+            <div class="result-comment">Author: {{ result1["person"] }}</div>
+            <div class="result-comment">Datasets: {{ result1["datasets"] }}</div>
+			<div class="result-comment"><a href="{{ result1['segmentation_link'] }}" target="_blank" title="{{ result1['segmentation_link'] }}">Segmentation Link</a></div>
+			<div class="result-comment"><a href="{{ result1['codebook'] }}" target="_blank" title="{{ result1['codebook'] }}">BindR Link</a></div>
+            <a href="{{ url_for('serve_json', result_id=0) }}" class="json-link" target="_blank">View Full JSON</a>
+        </div>
+        {% endif %}
+        {% if result2 %}
+        <div class="result-item">
+            <div class="ranking">2nd Best Match</div>
+			<div class="result-comment">Project Title: {{ result2["title"] }}</div>
+            <div class="result-comment">Filename: {{ result2["source_file"] }}</div>
+            <div class="result-detail">Line of Code: {{ result2["code_line"] }}</div>
+            <div class="result-detail">Code: <pre>{{ result2["code"] }}</pre></div>
+            <div class="result-comment">Comment: {{ result2["comment"] }}</div>
+            <div class="result-comment">Author: {{ result2["person"] }}</div>
+            <div class="result-comment">Datasets: {{ result2["datasets"] }}</div>
+			<div class="result-comment"><a href="{{ result2['segmentation_link'] }}" target="_blank" title="{{ result2['segmentation_link'] }}">Segmentation Link</a></div>
+			<div class="result-comment"><a href="{{ result2['codebook'] }}" target="_blank" title="{{ result2['codebook'] }}">BindR Link</a></div>
+            <a href="{{ url_for('serve_json', result_id=1) }}" class="json-link" target="_blank">View Full JSON</a>
+        </div>
+        {% endif %}
+        {% if result3 %}
+        <div class="result-item">
+            <div class="ranking">3rd Best Match</div>
+			<div class="result-comment">Project Title: {{ result3["title"] }}</div>
+            <div class="result-comment">Filename: {{ result3["source_file"] }}</div>
+            <div class="result-detail">Line of Code: {{ result3["code_line"] }}</div>
+            <div class="result-detail">Code: <pre>{{ result3["code"] }}</pre></div>
+            <div class="result-comment">Comment: {{ result3["comment"] }}</div>
+            <div class="result-comment">Author: {{ result3["person"] }}</div>
+            <div class="result-comment">Datasets: {{ result3["datasets"] }}</div>
+			<div class="result-comment"><a href="{{ result3['segmentation_link'] }}" target="_blank" title="{{ result3['segmentation_link'] }}">Segmentation Link</a></div>
+			<div class="result-comment"><a href="{{ result3['codebook'] }}" target="_blank" title="{{ result3['codebook'] }}">BindR Link</a></div>
+            <a href="{{ url_for('serve_json', result_id=2) }}" class="json-link" target="_blank">View Full JSON</a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Right Container: Results 4-6 -->
+    <div class="results-container">
+        <h2 class="results-heading">Results 1-3 for Hybrid search</h2>
+        {% if result4 %}
+        <div class="result-item">
+            <div class="ranking">1st Best Hybrid Match</div>
+			<div class="result-comment">Project Title: {{ result4["title"] }}</div>
+            <div class="result-comment">Filename: {{ result4["source_file"] }}</div>
+            <div class="result-detail">Line of Code: {{ result4["code_line"] }}</div>
+            <div class="result-detail">Code: <pre>{{ result4["code"] }}</pre></div>
+            <div class="result-comment">Comment: {{ result4["comment"] }}</div>
+            <div class="result-comment">Author: {{ result4["person"] }}</div>
+            <div class="result-comment">Datasets: {{ result4["datasets"] }}</div>
+			<div class="result-comment"><a href="{{ result4['segmentation_link'] }}" target="_blank" title="{{ result4['segmentation_link'] }}">Segmentation Link</a></div>
+			<div class="result-comment"><a href="{{ result4['codebook'] }}" target="_blank" title="{{ result4['codebook'] }}">BindR Link</a></div>
+            <a href="{{ url_for('serve_json', result_id=3) }}" class="json-link" target="_blank">View Full JSON</a>
+        </div>
+        {% endif %}
+        {% if result5 %}
+        <div class="result-item">
+            <div class="ranking">2nd Best Hybrid Match</div>
+			<div class="result-comment">Project Title: {{ result5["title"] }}</div>
+            <div class="result-comment">Filename: {{ result5["source_file"] }}</div>
+            <div class="result-detail">Line of Code: {{ result5["code_line"] }}</div>
+            <div class="result-detail">Code: <pre>{{ result5["code"] }}</pre></div>
+            <div class="result-comment">Comment: {{ result5["comment"] }}</div>
+            <div class="result-comment">Author: {{ result5["person"] }}</div>
+            <div class="result-comment">Datasets: {{ result5["datasets"] }}</div>
+			<div class="result-comment"><a href="{{ result5['segmentation_link'] }}" target="_blank" title="{{ result5['segmentation_link'] }}">Segmentation Link</a></div>
+			<div class="result-comment"><a href="{{ result5['codebook'] }}" target="_blank" title="{{ result5['codebook'] }}">BindR Link</a></div>
+            <a href="{{ url_for('serve_json', result_id=4) }}" class="json-link" target="_blank">View Full JSON</a>
+        </div>
+        {% endif %}
+        {% if result6 %}
+        <div class="result-item">
+            <div class="ranking">3rd Best Hybrid Match</div>
+			<div class="result-comment">Project Title: {{ result6["title"] }}</div>
+            <div class="result-comment">Filename: {{ result6["source_file"] }}</div>
+            <div class="result-detail">Line of Code: {{ result6["code_line"] }}</div>
+            <div class="result-detail">Code: <pre>{{ result6["code"] }}</pre></div>
+            <div class="result-comment">Comment: {{ result6["comment"] }}</div>
+            <div class="result-comment">Author: {{ result6["person"] }}</div>
+            <div class="result-comment">Datasets: {{ result6["datasets"] }}</div>
+			<div class="result-comment"><a href="{{ result6['segmentation_link'] }}" target="_blank" title="{{ result6['segmentation_link'] }}">Segmentation Link</a></div>
+			<div class="result-comment"><a href="{{ result6['codebook'] }}" target="_blank" title="{{ result6['codebook'] }}">BindR Link</a></div>
+            <a href="{{ url_for('serve_json', result_id=5) }}" class="json-link" target="_blank">View Full JSON</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+  function toggleFilters() {
+      const filterOptions = document.getElementById('filter-options');
+      const filterButton = document.querySelector('.filter-button');
+      const isVisible = filterButton.getAttribute('data-filter-visible') === 'true';
+
+      if (isVisible) {
+          filterOptions.style.display = 'none';
+          filterButton.setAttribute('data-filter-visible', 'false');
+      } else {
+          filterOptions.style.display = 'flex';
+          filterButton.setAttribute('data-filter-visible', 'true');
+      }
+  }
+
+  document.getElementById('search-form').addEventListener('submit', function(event) {
+      const searchInput = document.querySelector('input[name="search_query"]');
+      const checkboxes = document.querySelectorAll('input[name="filters"]');
+      const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+      if (searchInput.value.trim() === '') {
+          alert('Please enter a search query.');
+          event.preventDefault();
+          return;
+      }
+
+      if (checkedCount !== 1) {
+          alert('Please select exactly one filter.');
+          event.preventDefault();
+          return;
+      }
+  });
+</script>
+</body>
+</html>

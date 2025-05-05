@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheet.css') }}" />
+    <meta charset="UTF-8">
+    <title>Codesearch-Prototype</title>
+</head>
+<body>
+
+    <div class="header-container">
+        <div class="logo-and-title">
+            <span class="dbis-text">DBIS</span>
+            <img class="uni-logo" src="{{ url_for('static', filename='logo-uni-ulm.svg') }}" alt="University Logo">
+        </div>
+    </div>
+    
+    <div class="banner">
+        GESIS: Codesearch-Prototype
+    </div>
+
+<div id="box">
+    <h2 class="results-heading">Search Results for {{query}} using {{search_type}} Search</h2>
+
+    {% if result1 %}
+    <!-- Result 1 -->
+    <div class="result-container">
+        <div class="ranking">1st Best Match
+        <div class="result-title">Filename: {{ result1["source_file"] }}</div></div>
+        <div class="result-detail">Line of Code: {{ result1["code_line"] }}</div>
+        <div class="result-detail">Code: <pre>{{result1["code"] }}</pre></div>
+        <div class="result-comment">Comment: {{ result1["comment"] }}</div>
+        <a href="{{ url_for('serve_json', result_id=0) }}" class="json-link" target="_blank">
+            View Full JSON
+        </a>
+    </div>
+
+    {% else %}
+        <p>No results found.</p>
+    
+    {% endif %}
+    {% if result2 %}
+    <!-- Result 2 -->
+    <div class="result-container pre">
+        <div class="ranking">2nd Best Match
+        <div class="result-title">Filename: {{ result2["source_file"] }}</div></div>
+        <div class="result-detail">Line of Code: {{ result2["code_line"] }}</div>
+        <div class="result-detail">Code: <pre>{{ result2["code"] }}</pre></div>
+        <div class="result-comment">Comment: {{ result2["comment"] }}</div>
+        <a href="{{ url_for('serve_json', result_id=1) }}" class="json-link" target="_blank">
+            View Full JSON
+        </a>
+    </div>
+
+    {% endif %}
+    {% if result3 %}
+    <!-- Result 3 -->
+    <div class="result-container">
+        <div class="ranking">3rd Best Match
+        <div class="result-title">Filename: {{ result3["source_file"] }}</div></div>
+        <div class="result-detail">Line of Code: {{ result3["code_line"] }}</div>
+        <div class="result-detail">Code: <pre>{{ result3["code"] }}</pre></div>
+        <div class="result-comment">Comment: {{ result3["comment"] }}</div>
+        <a href="{{ url_for('serve_json', result_id=2) }}" class="json-link" target="_blank">
+            View Full JSON
+        </a>
+    </div>
+    {% endif %}
+    <form id="retry search", action="/" method="GET">
+        <button type="submit" class="search-button">Retry</button>
+    </form>
+    
+</div>
+
+</body>
+</html>
