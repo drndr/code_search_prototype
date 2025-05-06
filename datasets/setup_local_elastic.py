@@ -503,8 +503,8 @@ def delete_index(index_name):
 def add_to_index(index_name):
     file = open("./ds_json_schema.jsonl", "r", encoding="utf8")
     jsonObj = pd.read_json(path_or_buf=file, lines=True)
-    loaded = Dataset.load_from_disk("./embeddings_code")
-    loaded2 = Dataset.load_from_disk("./embeddings_comment")
+    loaded = Dataset.load_from_disk("./fine-tuned/embeddings_code")
+    loaded2 = Dataset.load_from_disk("./fine-tuned/embeddings_comment")
     data2 = []
     for i, embedding in enumerate(loaded['embeddings']):
             
