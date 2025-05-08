@@ -3,8 +3,8 @@ import requests
 from transformers import AutoTokenizer, AutoModel
 from search_funcs import hybrid_search, code_comment_search, author_search, dataset_search, project_search
 import torch
-app = Flask(__name__)
 
+app = Flask(__name__)
 
 ###########################
 # Search functionalities
@@ -165,7 +165,11 @@ if __name__ == '__main__':
     model_ckpt = "Salesforce/codet5p-110m-embedding"
     tokenizer = AutoTokenizer.from_pretrained(model_ckpt, trust_remote_code=True)
     model = AutoModel.from_pretrained(model_ckpt, trust_remote_code=True)
-    #model.load_state_dict(torch.load('model/python_model_t5+.pth',map_location=torch.device('cpu')))
     
+    try:        
+        model.load_state_dict(torch.load('training/fine-tuned_codet5p.pth'))
+    except FileNotFoundError:
+        print("Error: Fine-tuned model file not found.")
+        
     # Run Web App: http://127.0.0.1:5000/
     app.run(host='0.0.0.0', port=5000, debug=True)

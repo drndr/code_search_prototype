@@ -1,0 +1,5 @@
+# Python cache files
+__pycache__/
+
+# Specific model file
+training/fine-tuned_codet5p.pth
