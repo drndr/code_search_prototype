@@ -453,10 +453,19 @@ def create_index(index_name):
                         "datasets": {
                             "type": "text",   
                         },
+                        "datasets_url_string": {
+                            "type": "text",   
+                        },
+                        "datasets_url_html": {
+                            "type": "text",   
+                        },
                         "packages": {
                             "type": "text",
                         },
-                        "package_urls": {
+                        "packages_url_string": {
+                            "type": "text",
+                        },
+                        "packages_url_html": {
                             "type": "text",
                         },
                         "output_types": {
@@ -483,7 +492,7 @@ def create_index(index_name):
                         "segmentation_link": {
                             "type": "text",    
                         },
-                        "codebook": {
+                        "binder_link": {
                             "type": "text",    
                         }
                         }
@@ -503,11 +512,13 @@ def delete_index(index_name):
 def add_to_index(index_name):
     file = open("./ds_json_schema.jsonl", "r", encoding="utf8")
     jsonObj = pd.read_json(path_or_buf=file, lines=True)
-    loaded = Dataset.load_from_disk("./fine-tuned/embeddings_code")
-    loaded2 = Dataset.load_from_disk("./fine-tuned/embeddings_comment")
+    loaded = Dataset.load_from_disk("./fine-tuned_embs/embeddings_code") #pre-trained_embs
+    loaded2 = Dataset.load_from_disk("./fine-tuned_embs/embeddings_comment") #pre-trained_embs
     data2 = []
-    for i, embedding in enumerate(loaded['embeddings']):
-            
+    for i, embedding in enumerate(loaded):
+        
+        embedding_code = [loaded[i][str(j)] for j in range(256)]
+        embedding_comment = [loaded2[i][str(j)] for j in range(256)]
         # For the dataset field remove paths and file extensions
         datasets = []
         dataset_field = jsonObj["Datasets"][i]
@@ -541,9 +552,12 @@ def add_to_index(index_name):
         Line = jsonObj['Line'][i]
         Code = jsonObj['Code'][i]
         Comment = jsonObj['Comment'][i]
-        Author = jsonObj['Author'][i] 
+        Author = jsonObj['Author'][i]
+        Datasets_URL_String = jsonObj["Datasets URL String"][i]
+        Datasets_URL_HTML = jsonObj["Datasets URL HTML"][i]
         Packages = jsonObj['Packages'][i]
-        Package_URL = jsonObj["Package URLs"][i]
+        Packages_URL_String = jsonObj["Packages URL String"][i]
+        Packages_URL_HTML = jsonObj["Packages URL HTML"][i]
         Output_Types = jsonObj['Output Types'][i]
         Output_Names = jsonObj['Output Names'][i]
         Source = jsonObj['Source'][i]
@@ -552,8 +566,8 @@ def add_to_index(index_name):
         Publication_Date = jsonObj['Publication Date'][i]
         DOI = jsonObj['DOI'][i]
         Date_modified = jsonObj['Date Modified'][i]
-        Segmentation_Link = jsonObj['Segmentation link'][i]
-        Codebook = jsonObj['Codebook'][i]
+        Segmentation_Link = jsonObj['Segmentation Link'][i]
+        Binder_Link = jsonObj['Binder Link'][i]
         
         request_body = ''
         entry = {
@@ -562,8 +576,8 @@ def add_to_index(index_name):
         data2.append(entry)
         data2.append({
             "_all":[str(Project), str(Author)],
-            "code-vector": loaded["embeddings"][i],
-            "comment-vector": loaded2["embeddings"][i],
+            "code-vector": embedding_code,
+            "comment-vector": embedding_comment,
             "type": "research_code",
             "title": str(Project),
             "abstract": "",
@@ -625,8 +639,11 @@ def add_to_index(index_name):
             "doi": str(DOI),
             "id": "",
             "datasets": str(datasets),
+            "datasets_url_string": str(Datasets_URL_String),
+            "datasets_url_html": str(Datasets_URL_HTML),
             "packages": str(Packages),
-            "package_url": str(Package_URL),
+            "packages_url_string": str(Packages_URL_String),
+            "packages_url_html": str(Packages_URL_HTML),
             "output_types": str(Output_Types),
             "output_names": str(Output_Names),
             "license": str(License),
@@ -635,7 +652,7 @@ def add_to_index(index_name):
             "code": str(Code),
             "comment": str(Comment),
             "segmentation_link": str(Segmentation_Link),
-            "codebook": str(Codebook)
+            "binder_link": str(Binder_Link)
         })
     for item in data2:
         request_body += json.dumps(item) + '\n'

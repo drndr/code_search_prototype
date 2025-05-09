@@ -98,7 +98,7 @@ def author_search(query):
             } 
     s = requests.post(url=endpoint+"/new-index3/_search", headers=header, json=payload, verify=False, auth=auth)
     print(s.status_code)
-    print(s.json())
+    #print(s.json())
     results = []
     score = []
     for i in s.json()['hits']['hits']:
@@ -135,7 +135,7 @@ def dataset_search(query):
             }
     s = requests.post(url=endpoint+"/new-index3/_search", headers=header, json=payload, verify=False, auth=auth)
     print(s.status_code)
-    print(s.json())
+    #print(s.json())
     results = []
     score = []
     for i in s.json()['hits']['hits']:

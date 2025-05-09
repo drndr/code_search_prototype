@@ -52,9 +52,9 @@
             <div class="result-detail">Code: <pre>{{ result1["code"] }}</pre></div>
             <div class="result-comment">Comment: {{ result1["comment"] }}</div>
             <div class="result-comment">Author: {{ result1["person"] }}</div>
-            <div class="result-comment">Datasets: {{ result1["datasets"] }}</div>
+			<div class="result-comment">Datasets: {{ result1["datasets_url_html"]|safe }}</div>
 			<div class="result-comment"><a href="{{ result1['segmentation_link'] }}" target="_blank" title="{{ result1['segmentation_link'] }}">Segmentation Link</a></div>
-			<div class="result-comment"><a href="{{ result1['codebook'] }}" target="_blank" title="{{ result1['codebook'] }}">BindR Link</a></div>
+			<div class="result-comment"><a href="{{ result1['binder_link'] }}" target="_blank" title="{{ result1['binder_link'] }}">Binder Link</a></div>
             <a href="{{ url_for('serve_json', result_id=0) }}" class="json-link" target="_blank">View Full JSON</a>
         </div>
         {% endif %}
@@ -67,9 +67,9 @@
             <div class="result-detail">Code: <pre>{{ result2["code"] }}</pre></div>
             <div class="result-comment">Comment: {{ result2["comment"] }}</div>
             <div class="result-comment">Author: {{ result2["person"] }}</div>
-            <div class="result-comment">Datasets: {{ result2["datasets"] }}</div>
+			<div class="result-comment">Datasets: {{ result2["datasets_url_html"]|safe }}</div>
 			<div class="result-comment"><a href="{{ result2['segmentation_link'] }}" target="_blank" title="{{ result2['segmentation_link'] }}">Segmentation Link</a></div>
-			<div class="result-comment"><a href="{{ result2['codebook'] }}" target="_blank" title="{{ result2['codebook'] }}">BindR Link</a></div>
+			<div class="result-comment"><a href="{{ result2['binder_link'] }}" target="_blank" title="{{ result2['binder_link'] }}">Binder Link</a></div>
             <a href="{{ url_for('serve_json', result_id=1) }}" class="json-link" target="_blank">View Full JSON</a>
         </div>
         {% endif %}
@@ -82,9 +82,9 @@
             <div class="result-detail">Code: <pre>{{ result3["code"] }}</pre></div>
             <div class="result-comment">Comment: {{ result3["comment"] }}</div>
             <div class="result-comment">Author: {{ result3["person"] }}</div>
-            <div class="result-comment">Datasets: {{ result3["datasets"] }}</div>
+			<div class="result-comment">Datasets: {{ result3["datasets_url_html"]|safe }}</div>
 			<div class="result-comment"><a href="{{ result3['segmentation_link'] }}" target="_blank" title="{{ result3['segmentation_link'] }}">Segmentation Link</a></div>
-			<div class="result-comment"><a href="{{ result3['codebook'] }}" target="_blank" title="{{ result3['codebook'] }}">BindR Link</a></div>
+			<div class="result-comment"><a href="{{ result3['binder_link'] }}" target="_blank" title="{{ result3['binder_link'] }}">Binder Link</a></div>
             <a href="{{ url_for('serve_json', result_id=2) }}" class="json-link" target="_blank">View Full JSON</a>
         </div>
         {% endif %}
@@ -102,9 +102,9 @@
             <div class="result-detail">Code: <pre>{{ result4["code"] }}</pre></div>
             <div class="result-comment">Comment: {{ result4["comment"] }}</div>
             <div class="result-comment">Author: {{ result4["person"] }}</div>
-            <div class="result-comment">Datasets: {{ result4["datasets"] }}</div>
+			<div class="result-comment">Datasets: {{ result4["datasets_url_html"]|safe }}</div>
 			<div class="result-comment"><a href="{{ result4['segmentation_link'] }}" target="_blank" title="{{ result4['segmentation_link'] }}">Segmentation Link</a></div>
-			<div class="result-comment"><a href="{{ result4['codebook'] }}" target="_blank" title="{{ result4['codebook'] }}">BindR Link</a></div>
+			<div class="result-comment"><a href="{{ result4['binder_link'] }}" target="_blank" title="{{ result4['binder_link'] }}">Binder Link</a></div>
             <a href="{{ url_for('serve_json', result_id=3) }}" class="json-link" target="_blank">View Full JSON</a>
         </div>
         {% endif %}
@@ -117,9 +117,9 @@
             <div class="result-detail">Code: <pre>{{ result5["code"] }}</pre></div>
             <div class="result-comment">Comment: {{ result5["comment"] }}</div>
             <div class="result-comment">Author: {{ result5["person"] }}</div>
-            <div class="result-comment">Datasets: {{ result5["datasets"] }}</div>
+			<div class="result-comment">Datasets: {{ result5["datasets_url_html"]|safe }}</div>
 			<div class="result-comment"><a href="{{ result5['segmentation_link'] }}" target="_blank" title="{{ result5['segmentation_link'] }}">Segmentation Link</a></div>
-			<div class="result-comment"><a href="{{ result5['codebook'] }}" target="_blank" title="{{ result5['codebook'] }}">BindR Link</a></div>
+			<div class="result-comment"><a href="{{ result5['binder_link'] }}" target="_blank" title="{{ result5['binder_link'] }}">Binder Link</a></div>
             <a href="{{ url_for('serve_json', result_id=4) }}" class="json-link" target="_blank">View Full JSON</a>
         </div>
         {% endif %}
@@ -132,9 +132,9 @@
             <div class="result-detail">Code: <pre>{{ result6["code"] }}</pre></div>
             <div class="result-comment">Comment: {{ result6["comment"] }}</div>
             <div class="result-comment">Author: {{ result6["person"] }}</div>
-            <div class="result-comment">Datasets: {{ result6["datasets"] }}</div>
+			<div class="result-comment">Datasets: {{ result6["datasets_url_html"]|safe }}</div>
 			<div class="result-comment"><a href="{{ result6['segmentation_link'] }}" target="_blank" title="{{ result6['segmentation_link'] }}">Segmentation Link</a></div>
-			<div class="result-comment"><a href="{{ result6['codebook'] }}" target="_blank" title="{{ result6['codebook'] }}">BindR Link</a></div>
+			<div class="result-comment"><a href="{{ result6['binder_link'] }}" target="_blank" title="{{ result6['binder_link'] }}">Binder Link</a></div>
             <a href="{{ url_for('serve_json', result_id=5) }}" class="json-link" target="_blank">View Full JSON</a>
         </div>
         {% endif %}

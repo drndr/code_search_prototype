@@ -29,8 +29,11 @@ def create_json_schema():
                         "Comment": row["Comment"],
                         "Author": row["Author"],
                         "Datasets": row["Datasets"],
+                        "Datasets URL String": row["Datasets_url"],
+                        "Datasets URL HTML": row["Datasets_html_url"],
                         "Packages": row["Packages"],
-                        "Package URLs": row["Packages URL"],
+                        "Packages URL String": row["Packages_url"],
+                        "Packages URL HTML": row["Packages_html_url"],
                         "Output Types": row["Output Types"],
                         "Output Names": row["Output Names"],
                         "Source": row["Source"],
@@ -40,8 +43,8 @@ def create_json_schema():
                         "Publication Date": row["Publication date"],
                         "Date Modified": row["Date modified"],
                         "DOI": row["DOI"],
-                        "Segmentation link": row["Segmentation"],
-                        "Codebook": row["Binder Link"]
+                        "Segmentation Link": row["Segmentation"],
+                        "Binder Link": row["Binder Link"]
                     }
             json_line = json.dumps(json_object, ensure_ascii=True)
             jsonl_file.write(json_line + '\n')

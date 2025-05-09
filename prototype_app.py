@@ -59,7 +59,7 @@ def index():
                     del k["code-vector"]
                     del k["comment-vector"]
                 except KeyError:
-                    print("key not found")
+                    print("key not found kaka")
                 html_list.append(k)
         else:
             for i in result[0]["hits"]["hits"]:
@@ -74,17 +74,15 @@ def index():
         result2 = hybrid_search(query=query, query_vector= query_embedding)
         for i in result2:
             k=i["_source"]
-            print(k)
             # remove tensors
-            try:
-                del k["code-vector"]
-                del k["comment-vector"]
-            except KeyError:
-                print("key not found")
+            #try:
+            #    del k["code-vector"]
+            #    del k["comment-vector"]
+            #except KeyError:
+            #    print("key not found kaka")
             html_list.append(k)
         while len(html_list) < 6:
             html_list.append("")
-        print(html_list[0])
         
         return render_template('index.html', query=query, result1=html_list[0], result2=html_list[1], result3=html_list[2], result4=html_list[3], result5=html_list[4], result6=html_list[5], search_type=selected_filters[0])
     
@@ -107,7 +105,7 @@ def results():
                 del k["code-vector"]
                 del k["comment-vector"]
             except KeyError:
-                print("key not found")
+                print("key not found kaki")
             html_list.append(k)
     else:
         for i in result[0]["hits"]["hits"]:
@@ -116,7 +114,7 @@ def results():
                 del k["code-vector"]
                 del k["comment-vector"]
             except KeyError:
-                print("key not found")
+                print("key not found kaki")
             html_list.append(k) 
     while len(html_list) < 3:
         html_list.append("")
