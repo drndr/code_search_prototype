@@ -494,6 +494,15 @@ def create_index(index_name):
                         },
                         "binder_link": {
                             "type": "text",    
+                        },
+                        "execution_status": {
+                            "type": "text",    
+                        },
+                        "error_reason": {
+                            "type": "text",    
+                        },
+                        "error_message": {
+                            "type": "text",    
                         }
                         }
                     }   
@@ -568,6 +577,9 @@ def add_to_index(index_name):
         Date_modified = jsonObj['Date Modified'][i]
         Segmentation_Link = jsonObj['Segmentation Link'][i]
         Binder_Link = jsonObj['Binder Link'][i]
+        Execution_Status = jsonObj['Execution Status'][i]
+        Error_Reason = jsonObj['Reason'][i]
+        Error_Message = jsonObj['Error Message'][i]
         
         request_body = ''
         entry = {
@@ -652,7 +664,10 @@ def add_to_index(index_name):
             "code": str(Code),
             "comment": str(Comment),
             "segmentation_link": str(Segmentation_Link),
-            "binder_link": str(Binder_Link)
+            "binder_link": str(Binder_Link),
+            "execution_status": str(Execution_Status),
+            "error_reason": str(Error_Reason),
+            "error_message": str(Error_Message)
         })
     for item in data2:
         request_body += json.dumps(item) + '\n'

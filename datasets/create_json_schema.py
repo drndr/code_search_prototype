@@ -44,7 +44,11 @@ def create_json_schema():
                         "Date Modified": row["Date modified"],
                         "DOI": row["DOI"],
                         "Segmentation Link": row["Segmentation"],
-                        "Binder Link": row["Binder Link"]
+                        "Binder Link": row["Binder Link"],
+                        "Execution Status": row["Execution Status"],
+                        "Reason": row["Reason"],
+                        "Error Message": row["Error Message"]
+                        
                     }
             json_line = json.dumps(json_object, ensure_ascii=True)
             jsonl_file.write(json_line + '\n')
