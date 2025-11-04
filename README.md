@@ -14,7 +14,7 @@ The app lets you search across:
 
 ```text
 code_search_prototype/
-├─ datasets/          # Prepared data / indices (adapted for the GESIS search templates 
+├─ datasets/          # Prepared data / indices (adapted for the GESIS search templates) 
 ├─ static/            # CSS, JS, etc. for the web UI
 ├─ templates/
 │  ├─ index.html      # Main search page 
@@ -52,8 +52,12 @@ Python packages:
 
 - run elastic search in installation folder via bin/elasticsearch (default endpoint: http://localhost:9200)
 
-- update the Authorization, username and password fields for elasticsearch in the `prototype_app.py` and `search_funcs.py` files, with your own elasticsearch credentials
+- update the Authorization, username and password fields for elasticsearch in the `prototype_app.py`, `search_funcs.py` and `setup_local_elastic.py` files, with your own elasticsearch credentials
 
 - optional: use `train_eval_t5+.ipynb` for finetuning and creating new code/comment embeddings
+
+- optional: use `create_json_schema.py` to convert dataset csv to json
+
+- run `setup_local_elastic.py` to create local Elasticsearch databse
 
 - run `prototype_app.py` (default address: http://127.0.0.1:5000/)
